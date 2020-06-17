@@ -1,13 +1,13 @@
 class Employee:
     _numberOfEmployees=0
-
+    _employeeSalaryList=[]
 
     def __init__(self, name, family, salary, department):
         self._name=name
         self._family=family
         self._salary=salary
         self._department=department
-
+        Employee._employeeSalaryList.append(salary)
         Employee._numberOfEmployees+=1
 
 
@@ -20,21 +20,24 @@ class Employee:
     def getDepartment(self):
         return self._department
 
-    def average_Salary(self,employees:list) -> int :
-        total=0
-        for employee in employees:
-            total += employee.getSalary()
-        return total
+    def average_Salary(self):
+        return sum(Employee._employeeSalaryList)/Employee._numberOfEmployees
 
 
 class FullTimeEmployee(Employee):
     def __init__(self,name, family, salary, department,hours):
         super.__init__(name, family, salary, department)
-        self.numberofhours=hours
+        self._hoursPerWeek=hours
+    def getHoursPerWeek(self):
+        return self._hoursPerWeek
 
 
 
-a=Employee("Nika",'Dzidzava',100000,'CS')
-b=Employee("Nika",'Dzidzava',100000,'CS')
 
-print(a.getName(), b.getFamily())
+
+a=Employee("Nik",'Dzidzava',100000,'CS')
+b=Employee("Conor",'McGregor',11100000,'UFC')
+
+print(a.average_Salary(),'is average salary')
+print(a.getName(), a.getFamily())
+print("get number of employees: ", b._numberOfEmployees)
